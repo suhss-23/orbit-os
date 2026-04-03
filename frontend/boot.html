@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orbit OS - Booting</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/aurora.css">
     <style>
-        /* Base styling matching the dark, cosmic theme */
         body, html {
             margin: 0;
             padding: 0;
             width: 100vw;
             height: 100vh;
-            background-color: #0b0f19;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -21,7 +21,6 @@
             overflow: hidden;
         }
 
-        /* Animated Orbit OS Logo */
         .orbit-logo {
             position: relative;
             width: 120px;
@@ -56,12 +55,11 @@
             left: 44px;
             width: 12px;
             height: 12px;
-            background: #4facfe;
+            background: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 10px #4facfe;
+            box-shadow: 0 0 10px var(--accent);
         }
 
-        /* 3-Second Progress Bar */
         .boot-container {
             width: 250px;
             display: flex;
@@ -89,29 +87,26 @@
         .progress-fill {
             height: 100%;
             width: 0%;
-            background: #4facfe;
-            box-shadow: 0 0 10px #4facfe;
-            /* Fills from 0 to 100% over exactly 3 seconds */
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
             animation: load 3s ease-in-out forwards;
         }
 
-        /* Keyframes */
         @keyframes spin {
             100% { transform: rotate(360deg); }
         }
 
         @keyframes load {
-            0% { width: 0%; }
-            50% { width: 60%; }
+            0%   { width: 0%; }
+            50%  { width: 60%; }
             100% { width: 100%; }
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
+            50%       { opacity: 1; }
         }
 
-        /* Fade out transition applied via JS */
         .fade-out {
             opacity: 0;
             transition: opacity 0.5s ease;
@@ -119,6 +114,8 @@
     </style>
 </head>
 <body>
+
+    <div class="aurora-bg"></div>
 
     <div class="orbit-logo">
         <div class="ring">
@@ -135,11 +132,13 @@
     </div>
 
     <script>
-        // Wait exactly 3 seconds for the progress bar to fill, then trigger transition
+        // Load saved theme before anything renders
+        const savedTheme = localStorage.getItem('orbit-theme') || 'blue';
+        document.body.setAttribute('data-theme', savedTheme);
+
+        // Redirect after 3 seconds
         setTimeout(() => {
             document.body.classList.add('fade-out');
-            
-            // Wait 500ms for the fade-out CSS to finish before navigating
             setTimeout(() => {
                 window.location.href = 'lock.html';
             }, 500);

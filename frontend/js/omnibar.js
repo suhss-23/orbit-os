@@ -1,30 +1,30 @@
 // frontend/js/omnibar.js
-document.addEventListener("DOMContentLoaded", () => {
+
+document.addEventListener('DOMContentLoaded', () => {
     const omnibar = document.getElementById('omnibarInput');
 
-    // Ctrl+K Shortcut to focus the search bar
+    // Ctrl+K to focus omnibar
     document.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.key === 'k') {
-            e.preventDefault(); // Prevent browser search from opening
+            e.preventDefault();
             omnibar.focus();
         }
     });
 
-    // Handle Enter keypress
+    // Handle Enter
     omnibar.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             const command = omnibar.value.trim().toLowerCase();
-            console.log(`Executing command: ${command}`);
-            
-            // Basic Phase 1 command handling
+
+            // Theme commands — calls applyTheme() from theme.js
+            // so localStorage also gets updated
             if (command.startsWith('set theme ')) {
                 const theme = command.split(' ')[2];
                 if (['purple', 'blue', 'green', 'red'].includes(theme)) {
-                    document.body.setAttribute('data-theme', theme);
+                    applyTheme(theme);
                 }
             }
-            
-            // Clear input after execution
+
             omnibar.value = '';
             omnibar.blur();
         }

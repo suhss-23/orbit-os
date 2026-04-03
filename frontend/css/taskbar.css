@@ -30,6 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .launcher-btn:hover {
@@ -58,28 +59,10 @@
     border-color: var(--accent);
 }
 
-.theme-switcher {
-    display: flex;
-    gap: 10px;
-    margin-right: 20px;
-}
-
-.theme-dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: transform 0.2s, border-color 0.2s;
-}
-
-.theme-dot:hover {
-    transform: scale(1.2);
-    border-color: #ffffff;
-}
-
 .clock {
     font-weight: bold;
     font-size: 1rem;
     padding-right: 10px;
+    flex-shrink: 0;
+    color: var(--text-main);
 }

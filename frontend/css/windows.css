@@ -1,4 +1,5 @@
 /* frontend/css/windows.css */
+
 .os-window {
     position: absolute;
     top: 20%;
@@ -13,9 +14,15 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    /* Required for the 3D tilt effect */
     transform-style: preserve-3d;
     perspective: 1000px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.os-window.minimized {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95) translateY(20px);
 }
 
 .window-header {
@@ -51,14 +58,20 @@
     border-radius: 50%;
     border: none;
     cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.win-btn:hover {
+    opacity: 0.75;
 }
 
 .btn-close { background: #ff5f56; }
-.btn-min { background: #ffbd2e; }
-.btn-max { background: #27c93f; }
+.btn-min   { background: #ffbd2e; }
+.btn-max   { background: #27c93f; }
 
 .window-content {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
+    color: rgba(255, 255, 255, 0.8);
 }

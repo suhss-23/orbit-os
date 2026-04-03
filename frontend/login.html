@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit OS - Authentication</title>
+    <style>
+        /* Base styling matching the dark, cosmic theme */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0b0f19 0%, #16213e 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #ffffff;
+            overflow: hidden;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Glassmorphism Auth Card */
+        .auth-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            width: 320px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Small Logo for the Auth Screen */
+        .orbit-core-mini {
+            width: 24px;
+            height: 24px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #4facfe;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite alternate;
+        }
+
+        /* Tabs for Login / Register */
+        .tabs {
+            display: flex;
+            width: 100%;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 10px 0;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #4facfe;
+            border-bottom: 2px solid #4facfe;
+            font-weight: bold;
+        }
+
+        /* Forms */
+        .auth-form {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            gap: 15px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .auth-form.active {
+            display: flex;
+        }
+
+        input {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus {
+            border-color: #4facfe;
+            box-shadow: 0 0 8px rgba(79, 172, 254, 0.3);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        button.submit-btn {
+            background: #4facfe;
+            color: #0b0f19;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s, transform 0.1s;
+        }
+
+        button.submit-btn:hover {
+            background: #6ebcff;
+        }
+
+        button.submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            from { box-shadow: 0 0 10px #4facfe; }
+            to { box-shadow: 0 0 20px #4facfe, 0 0 40px #4facfe; }
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-card">
+        <div class="orbit-core-mini"></div>
+        
+        <div class="tabs">
+            <button class="tab-btn active" id="tabLogin">Login</button>
+            <button class="tab-btn" id="tabRegister">Register</button>
+        </div>
+
+        <form class="auth-form active" id="formLogin">
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit" class="submit-btn">Enter Orbit</button>
+        </form>
+
+        <form class="auth-form" id="formRegister">
+            <input type="text" placeholder="Choose Username" required>
+            <input type="password" placeholder="Create Password" required>
+            <button type="submit" class="submit-btn">Create Account</button>
+        </form>
+    </div>
+
+    <script>
+        const tabLogin = document.getElementById('tabLogin');
+        const tabRegister = document.getElementById('tabRegister');
+        const formLogin = document.getElementById('formLogin');
+        const formRegister = document.getElementById('formRegister');
+
+        // Tab Switching Logic
+        tabLogin.addEventListener('click', () => {
+            tabLogin.classList.add('active');
+            tabRegister.classList.remove('active');
+            formLogin.classList.add('active');
+            formRegister.classList.remove('active');
+        });
+
+        tabRegister.addEventListener('click', () => {
+            tabRegister.classList.add('active');
+            tabLogin.classList.remove('active');
+            formRegister.classList.add('active');
+            formLogin.classList.remove('active');
+        });
+
+        // Form Submission Logic (Simulating authentication for Phase 1)
+        function handleAuth(event) {
+            event.preventDefault(); // Prevent page reload
+            
+            // Fade out and transition to the main desktop
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 500);
+        }
+
+        formLogin.addEventListener('submit', handleAuth);
+        formRegister.addEventListener('submit', handleAuth);
+    </script>
+</body>
+</html>

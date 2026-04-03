@@ -1,0 +1,85 @@
+/* frontend/css/taskbar.css */
+.taskbar {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    height: 60px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.launcher-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.launcher-btn:hover {
+    background: var(--accent);
+    transform: scale(1.05);
+}
+
+.omnibar {
+    flex-grow: 1;
+    margin: 0 20px;
+}
+
+.omnibar input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.omnibar input:focus {
+    border-color: var(--accent);
+}
+
+.theme-switcher {
+    display: flex;
+    gap: 10px;
+    margin-right: 20px;
+}
+
+.theme-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.theme-dot:hover {
+    transform: scale(1.2);
+    border-color: #ffffff;
+}
+
+.clock {
+    font-weight: bold;
+    font-size: 1rem;
+    padding-right: 10px;
+}

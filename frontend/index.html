@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit OS</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/aurora.css">
+    <link rel="stylesheet" href="css/taskbar.css">
+    <link rel="stylesheet" href="css/windows.css">
+</head>
+<body data-theme="blue">
+
+    <div class="aurora-bg"></div>
+
+    <div class="orbit-container" id="orbitContainer">
+        <div class="orbit-core" id="orbitCore"></div>
+        </div>
+
+    <div id="windowContainer"></div>
+
+    <div class="taskbar">
+        <button class="launcher-btn" id="launcherBtn">🚀</button>
+        
+        <div class="omnibar">
+            <input type="text" placeholder="Search files, apps, or commands..." id="omnibarInput">
+        </div>
+        
+        <div class="theme-switcher" id="themeSwitcher">
+            <div class="theme-dot" data-theme="purple" style="background: #9b59b6;"></div>
+            <div class="theme-dot" data-theme="blue" style="background: #4facfe;"></div>
+            <div class="theme-dot" data-theme="green" style="background: #2ecc71;"></div>
+            <div class="theme-dot" data-theme="red" style="background: #e74c3c;"></div>
+        </div>
+        
+        <div class="clock" id="taskbarClock">00:00</div>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/orbit.js"></script>
+    <script src="js/windows.js"></script>
+    <script src="js/omnibar.js"></script>
+
+</body>
+</html>

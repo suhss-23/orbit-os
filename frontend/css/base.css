@@ -1,0 +1,101 @@
+/* Dynamic Theming via CSS Custom Properties */
+:root {
+    --theme-hue: 210; /* Default Blue */
+    --accent: hsl(var(--theme-hue), 100%, 65%);
+    --bg-dark: #0b0f19;
+    --text-main: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Theme overrides activated by JS */
+body[data-theme="purple"] { --theme-hue: 275; }
+body[data-theme="blue"] { --theme-hue: 210; }
+body[data-theme="green"] { --theme-hue: 145; }
+body[data-theme="red"] { --theme-hue: 0; }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-dark);
+}
+
+/* =========================================
+   Orbit Launcher Layout 
+========================================= */
+.orbit-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Let clicks pass through empty space */
+}
+
+.orbit-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, var(--accent), transparent 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 50px var(--accent);
+    pointer-events: auto;
+    cursor: pointer;
+    animation: corePulse 3s infinite alternate;
+}
+
+.app-orb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.app-orb:hover {
+    transform: scale(1.1) !important; /* Overrides JS positioning scale */
+    box-shadow: 0 0 20px var(--accent);
+    border-color: var(--accent);
+}
+
+.app-orb-icon {
+    font-size: 24px;
+}
+
+.app-orb-label {
+    position: absolute;
+    bottom: -25px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+
+.app-orb:hover .app-orb-label {
+    opacity: 1;
+}
+
+@keyframes corePulse {
+    from { transform: translate(-50%, -50%) scale(0.9); }
+    to { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 80px var(--accent); }
+}

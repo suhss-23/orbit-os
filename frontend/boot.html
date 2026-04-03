@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit OS - Booting</title>
+    <style>
+        /* Base styling matching the dark, cosmic theme */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #0b0f19;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Animated Orbit OS Logo */
+        .orbit-logo {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .core {
+            width: 30px;
+            height: 30px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.5);
+            z-index: 10;
+        }
+
+        .ring {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: spin 3s linear infinite;
+        }
+
+        .planet {
+            position: absolute;
+            top: -6px;
+            left: 44px;
+            width: 12px;
+            height: 12px;
+            background: #4facfe;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #4facfe;
+        }
+
+        /* 3-Second Progress Bar */
+        .boot-container {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .boot-text {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #4facfe;
+            box-shadow: 0 0 10px #4facfe;
+            /* Fills from 0 to 100% over exactly 3 seconds */
+            animation: load 3s ease-in-out forwards;
+        }
+
+        /* Keyframes */
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes load {
+            0% { width: 0%; }
+            50% { width: 60%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Fade out transition applied via JS */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orbit-logo">
+        <div class="ring">
+            <div class="planet"></div>
+        </div>
+        <div class="core"></div>
+    </div>
+
+    <div class="boot-container">
+        <div class="boot-text">Booting System</div>
+        <div class="progress-track">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        // Wait exactly 3 seconds for the progress bar to fill, then trigger transition
+        setTimeout(() => {
+            document.body.classList.add('fade-out');
+            
+            // Wait 500ms for the fade-out CSS to finish before navigating
+            setTimeout(() => {
+                window.location.href = 'lock.html';
+            }, 500);
+        }, 3000);
+    </script>
+</body>
+</html>
